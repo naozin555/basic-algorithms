@@ -1,0 +1,47 @@
+from typing import List
+
+
+def cocktail_sort(numbers: List[int]) -> List[int]:
+    """improvement sort of bubbl called shaker sort
+    Ave: O(n**2)
+    Best: O(n)
+    Worst: O(n**2)
+    Stability: Yes
+
+    >>> cocktail_sort([5, 66, 77, 2, 5])
+    [2, 5, 5, 66, 77]
+    """
+    len_numbers = len(numbers)
+    swapped = True
+    start = 0
+    end = len_numbers - 1
+    while swapped:
+        swapped = False
+        for i in range(start, end):
+            if numbers[i] > numbers[i+1]:
+                numbers[i], numbers[i + 1] = numbers[i+1], numbers[i]
+                swapped = True
+
+        if not swapped:
+            break
+
+        swapped = False
+        end = end - 1
+
+        for i in range(end-1, start-1, -1):
+            if numbers[i] > numbers[i+1]:
+                numbers[i], numbers[i + 1] = numbers[i+1], numbers[i]
+                swapped = True
+
+        start = start + 1
+
+    return numbers
+
+
+if __name__ == '__main__':
+    import random
+    nums = [random.randint(0, 1000) for i in range(10)]
+    print(cocktail_sort(nums))
+
+    # import doctest
+    # doctest.testmod()
